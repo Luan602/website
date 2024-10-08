@@ -147,18 +147,12 @@ h2 {
     align-items: center;
 }
 
+.lightbox.active {
+    display: flex;
+}
+
 .lightbox img {
     max-width: 90%;
     max-height: 90%;
     border-radius: 10px;
-}
-
-.lightbox:target {
-    display: flex;
-}
-
-footer {
-    text-align: center;
-    padding: 2rem;
-    background-color: #1f1f1f;
 }
