@@ -34,6 +34,10 @@ nav ul li a {
     font-weight: 400;
 }
 
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
 /* Hero Section with Parallax Scrolling */
 #hero {
     position: relative;
@@ -42,7 +46,7 @@ nav ul li a {
     justify-content: center;
     align-items: center;
     text-align: center;
-    background-image: url('philly_skyline.jpg'); /* Add your image */
+    background-image: url('background-image.jpg'); /* Add your image */
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
@@ -59,78 +63,115 @@ nav ul li a {
 }
 
 .btn {
-    display: inline-block;
+    background-color: #ff6600;
+    color: #ffffff;
     padding: 0.75rem 1.5rem;
-    background-color: #2196f3;
-    color: white;
-    border-radius: 5px;
     text-decoration: none;
-    font-size: 1rem;
     font-weight: 700;
-    transition: background-color 0.3s;
+    border-radius: 5px;
 }
 
 .btn:hover {
-    background-color: #1769aa;
+    background-color: #ff8533;
 }
 
-/* Fade-in Animation for Sections */
-.fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+/* About Section */
+#about {
+    padding: 4rem 2rem;
+    background-color: #1f1f1f;
 }
 
-.fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
+#about h2, #projects h2, #contact h2, #gallery h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
 }
 
-#about, #projects, #gallery, #contact {
+#about p {
+    font-size: 1.2rem;
+    color: #dddddd;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Projects Section */
+#projects {
     padding: 4rem 2rem;
 }
 
-h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: #f1f1f1;
-}
-
-#projects .project-grid {
+.project-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
 }
 
 .project-card {
-    background-color: #292929;
+    background-color: #222222;
     padding: 1.5rem;
     border-radius: 10px;
+    color: #ffffff;
 }
 
-/* Gallery Styles */
+.project-card h3 {
+    margin-bottom: 0.75rem;
+}
+
+.project-card p {
+    color: #dddddd;
+}
+
+/* Contact Section */
+#contact {
+    padding: 4rem 2rem;
+    background-color: #1f1f1f;
+    text-align: center;
+}
+
+#contact p {
+    font-size: 1.2rem;
+}
+
+#contact a {
+    color: #ff6600;
+    text-decoration: none;
+}
+
+#contact a:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    background-color: #1f1f1f;
+    padding: 1rem;
+    text-align: center;
+}
+
+footer p {
+    color: #888888;
+}
+
+/* Gallery Section */
+#gallery {
+    padding: 4rem 2rem;
+    background-color: #1f1f1f;
+}
+
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
     padding: 2rem;
-}
-
-.gallery-item {
-    display: block;
-    border-radius: 10px;
-    overflow: hidden;
-    transition: transform 0.3s ease;
 }
 
 .gallery-item img {
     width: 100%;
-    height: auto;
-    display: block;
     border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
 }
 
-.gallery-item:hover {
+.gallery-item img:hover {
     transform: scale(1.05);
 }
 
@@ -145,6 +186,7 @@ h2 {
     background-color: rgba(0, 0, 0, 0.8);
     justify-content: center;
     align-items: center;
+    z-index: 1000;
 }
 
 .lightbox.active {
@@ -155,4 +197,24 @@ h2 {
     max-width: 90%;
     max-height: 90%;
     border-radius: 10px;
+}
+
+/* Fade-in and Parallax Effect */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Parallax Scrolling */
+.parallax {
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
 }
