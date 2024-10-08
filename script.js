@@ -12,24 +12,19 @@ document.addEventListener("scroll", function() {
 });
 
 // Lightbox functionality for the gallery
-const galleryItems = document.querySelectorAll('.gallery-item');
-const lightbox = document.createElement('div');
-lightbox.id = 'lightbox';
-document.body.appendChild(lightbox);
+const galleryItems = document.querySelectorAll('.gallery-item img');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
 
 galleryItems.forEach(item => {
     item.addEventListener('click', e => {
-        e.preventDefault();
+        const fullImgUrl = e.target.getAttribute('data-full');
+        lightboxImg.src = fullImgUrl;
         lightbox.classList.add('active');
-        const img = document.createElement('img');
-        img.src = item.href;
-        while (lightbox.firstChild) {
-            lightbox.removeChild(lightbox.firstChild);
-        }
-        lightbox.appendChild(img);
     });
 });
 
 lightbox.addEventListener('click', () => {
     lightbox.classList.remove('active');
+    lightboxImg.src = '';  // Clear the image when closing
 });
