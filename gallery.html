@@ -25,9 +25,15 @@
     <section id="gallery" class="fade-in">
         <h2>Photography Gallery</h2>
         <div class="gallery-grid">
-            <a href="images/philly_skyline.jpg" class="gallery-item">
-                <img src="images/philly_skyline_thumbnail.jpg" alt="Philadelphia Skyline">
-            </a>
+            <div class="gallery-item">
+                <img src="images/photo1-thumbnail.jpg" alt="Photo 1" data-full="images/photo1-large.jpg">
+            </div>
+            <div class="gallery-item">
+                <img src="images/photo2-thumbnail.jpg" alt="Photo 2" data-full="images/photo2-large.jpg">
+            </div>
+            <div class="gallery-item">
+                <img src="images/photo3-thumbnail.jpg" alt="Photo 3" data-full="images/photo3-large.jpg">
+            </div>
             <!-- Add more images as needed -->
         </div>
     </section>
@@ -35,6 +41,10 @@
     <footer>
         <p>&copy; 2024 Luan Merolli. All rights reserved.</p>
     </footer>
+
+    <div id="lightbox" class="lightbox">
+        <img id="lightbox-img" src="" alt="Full-size Image">
+    </div>
 
     <script src="script.js"></script>
 </body>
