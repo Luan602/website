@@ -3,56 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Luan Merolli - Professional Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <title>Personal Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+            font-family: 'Arial', sans-serif;
+        }
+        a {
+            color: #58a6ff;
+        }
+        a:hover {
+            color: #1f6feb;
+        }
+    </style>
 </head>
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="https://www.linkedin.com/in/luan-merolli-75a4161b7/" target="_blank">LinkedIn</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <section id="hero" class="parallax">
-        <div class="hero-content">
-            <h1>Hi, I'm Luan Merolli</h1>
-            <p>Cybersecurity student at Drexel University based in Philadelphia, PA.</p>
-            <a href="https://www.linkedin.com/in/luan-merolli-75a4161b7/" target="_blank" class="btn">View LinkedIn</a>
-        </div>
-    </section>
-
-    <section id="about" class="fade-in">
-        <h2>About Me</h2>
-        <p>I'm Luan Merolli, a passionate professional in [Your Field]. I love creating solutions that make a difference.</p>
-    </section>
-
-    <section id="projects" class="fade-in">
-        <h2>Projects</h2>
-        <div class="project-grid">
-            <div class="project-card">
-                <h3>This website</h3>
-                <p>I created this website because I want to get more better. :D </p>
+<body class="font-sans">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header Section -->
+        <header class="mb-12">
+            <h1 class="text-5xl font-bold text-center mb-4">Your Name</h1>
+            <p class="text-xl text-center">Web Developer | Designer | Problem Solver</p>
+        </header>
+        
+        <!-- About Me Section -->
+        <section id="about" class="mb-16">
+            <h2 class="text-3xl font-semibold mb-4">About Me</h2>
+            <p class="leading-relaxed">I am a passionate web developer with experience in creating clean, modern websites. My focus is on writing code that is both functional and elegant, with an emphasis on readability and scalability.</p>
+        </section>
+        
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="mb-16">
+            <h2 class="text-3xl font-semibold mb-4">Portfolio</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Example project card -->
+                <div class="bg-gray-800 rounded-lg p-4">
+                    <h3 class="text-xl font-semibold mb-2">Project Title</h3>
+                    <p>A brief description of the project, including technologies used and your role.</p>
+                    <a href="#" class="inline-block mt-4">View Project</a>
+                </div>
             </div>
-        </div>
-    </section>
-
-    <section id="contact" class="fade-in">
-        <h2>Contact</h2>
-        <p>If you'd like to get in touch, feel free to reach out via <a href="mailto:youremail@example.com">email</a>.</p>
-    </section>
-
-    <footer>
-        <p>&copy; 2024 Luan Merolli. All rights reserved.</p>
-    </footer>
-
-    <script src="script.js"></script>
+        </section>
+        
+        <!-- Blog Section -->
+        <section id="blog" class="mb-16">
+            <h2 class="text-3xl font-semibold mb-4">Blog</h2>
+            <p>Coming soon! Check back later for articles on web development, technology trends, and personal experiences.</p>
+        </section>
+        
+        <!-- Contact Section -->
+        <section id="contact">
+            <h2 class="text-3xl font-semibold mb-4">Contact</h2>
+            <p>If you would like to get in touch, feel free to drop me an email at <a href="mailto:your.email@example.com">your.email@example.com</a> or connect with me on LinkedIn.</p>
+        </section>
+    </div>
 </body>
 </html>
