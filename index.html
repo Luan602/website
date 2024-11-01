@@ -1,62 +1,64 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Website</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
-    <style>
-        body {
-            background-color: #1a1a1a;
-            color: #f0f0f0;
-            font-family: 'Arial', sans-serif;
-        }
-        a {
-            color: #58a6ff;
-        }
-        a:hover {
-            color: #1f6feb;
-        }
-    </style>
+    <title>King of Pizza - Philadelphia</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body class="font-sans">
-    <div class="container mx-auto px-4 py-8">
-        <!-- Header Section -->
-        <header class="mb-12">
-            <h1 class="text-5xl font-bold text-center mb-4">Your Name</h1>
-            <p class="text-xl text-center">Web Developer | Designer | Problem Solver</p>
-        </header>
-        
-        <!-- About Me Section -->
-        <section id="about" class="mb-16">
-            <h2 class="text-3xl font-semibold mb-4">About Me</h2>
-            <p class="leading-relaxed">I am a passionate web developer with experience in creating clean, modern websites. My focus is on writing code that is both functional and elegant, with an emphasis on readability and scalability.</p>
-        </section>
-        
-        <!-- Portfolio Section -->
-        <section id="portfolio" class="mb-16">
-            <h2 class="text-3xl font-semibold mb-4">Portfolio</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Example project card -->
-                <div class="bg-gray-800 rounded-lg p-4">
-                    <h3 class="text-xl font-semibold mb-2">Project Title</h3>
-                    <p>A brief description of the project, including technologies used and your role.</p>
-                    <a href="#" class="inline-block mt-4">View Project</a>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Blog Section -->
-        <section id="blog" class="mb-16">
-            <h2 class="text-3xl font-semibold mb-4">Blog</h2>
-            <p>Coming soon! Check back later for articles on web development, technology trends, and personal experiences.</p>
-        </section>
-        
-        <!-- Contact Section -->
-        <section id="contact">
-            <h2 class="text-3xl font-semibold mb-4">Contact</h2>
-            <p>If you would like to get in touch, feel free to drop me an email at <a href="mailto:your.email@example.com">your.email@example.com</a> or connect with me on LinkedIn.</p>
-        </section>
-    </div>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#our-story">Our Story</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#hours-location">Hours & Location</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Homepage Section -->
+    <section id="home" class="section">
+        <h1>Welcome to King of Pizza</h1>
+        <p>Serving Philadelphia’s finest hand-tossed pizzas since 1970! A family-owned gem on Germantown Avenue.</p>
+    </section>
+
+    <!-- Our Story Section -->
+    <section id="our-story" class="section">
+        <h2>Our Journey</h2>
+        <p>For over 50 years, King of Pizza has been a North Philadelphia staple. Every slice is crafted with family tradition and the same recipes that have kept our customers coming back.</p>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="section">
+        <h2>Our Menu</h2>
+        <ul>
+            <li>Cheese Pizza</li>
+            <li>Sausage Pizza (Beef Sausage)</li>
+            <li>Pepperoni Pizza (Beef Pepperoni)</li>
+        </ul>
+        <p><strong>Note:</strong> Cash-only</p>
+    </section>
+
+    <!-- Hours & Location Section -->
+    <section id="hours-location" class="section">
+        <h2>Hours & Location</h2>
+        <p><strong>Hours:</strong><br> Monday - Saturday: 10:30 AM - 6:00 PM<br>Sunday: Closed</p>
+        <p><strong>Location:</strong> 3633 Germantown Ave, Philadelphia, PA 19140</p>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!..." width="600" height="450" allowfullscreen="" loading="lazy"></iframe>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <h2>Contact Us</h2>
+        <p>Phone: (215) 123-4567</p>
+        <p>Follow us on Yelp, Google Reviews!</p>
+    </section>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>
