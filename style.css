@@ -190,12 +190,15 @@ section h2 {
 /* Grid for Images */
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(3, 1fr)); /* Adjust column size */
+  gap: 1rem; /* Reduce spacing between photos */
+  justify-content: center; /* Center-align photos */
+  align-items: center; /* Ensure vertical alignment */
 }
 
+
 .gallery-grid img {
-  width: 30%;
+  width: 100%;
   aspect-ratio: 3 / 2; /* Adjust to your preferred ratio (width:height) */
   object-fit: cover; /* Keep the image filling the thumbnail box */
   border-radius: 8px;
