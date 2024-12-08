@@ -2,7 +2,7 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
 }
 
 /* Body Styling */
@@ -216,7 +216,7 @@ section h2 {
 }
 
 /* Navigation - Move to Bottom Left for Mobile */
-@media (max-width: 768px) {
+@media (max-width: 999px) {
   nav {
     position: static; /* Remove fixed positioning */
     display: flex;
@@ -237,5 +237,54 @@ section h2 {
 
   nav a:hover {
     text-decoration: underline; /* Add underline effect on hover */
+  }
+}
+
+/* Center Sections on Mobile */
+@media (max-width: 768px) {
+  section {
+    margin: 1rem auto; /* Center horizontally using auto margins */
+    padding: 1rem; /* Adjust padding for mobile */
+    max-width: 90%; /* Ensure the width fits within the screen */
+    text-align: left; /* Center-align text inside the sections */
+  }
+
+  /* Ensure the content inside the section is centered */
+  section h2 {
+    text-align: left; /* Center section headings */
+  }
+
+  section p {
+    text-align: left; /* Center paragraphs */
+  }
+}
+
+/* Spotify Box Styling for Consistency */
+@media (max-width: 999px) {
+  section {
+    margin: 1rem auto; /* Center sections horizontally */
+    padding: 1.5rem; /* Adjust padding for better spacing */
+    max-width: 90%; /* Limit width to fit within the screen */
+    background-color: #1a1a1a; /* Ensure consistent background */
+    border-radius: 8px; /* Add rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Add consistent shadow */
+    text-align: left; /* Center align text */
+  }
+
+  /* Center Embedded Spotify Content */
+  .spotify-embed,
+  section iframe {
+    width: 100%; /* Ensure the Spotify player spans the section width */
+    max-width: 90%; /* Add a max-width to keep it consistent with other content */
+    margin: 0 auto; /* Center the Spotify content horizontally */
+    display: block; /* Ensure it's treated as a block element */
+    border-radius: 8px; /* Match the photography box styling */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Add subtle shadow */
+  }
+
+  /* Ensure Headings Match Other Sections */
+  section h2 {
+    text-align: left; /* Center-align section headings */
+    color: #76c7c0; /* Accent color for headings */
   }
 }
