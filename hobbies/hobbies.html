@@ -5,8 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>hobbies</title>
   <link rel="stylesheet" href="../style.css">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+  <!-- GLightbox CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" rel="stylesheet">
+
+
 </head>
+
 <body>
   <header>
     <h1>hobbies</h1>
@@ -25,10 +29,10 @@
     <section id="gallery">
       <h2>Photo Gallery</h2>
       <div class="gallery-grid">
-        <a href="gallery/skogar_lg.jpg" data-lightbox="gallery" data-title="Skogar">
-          <img src="gallery/skogar_sm.jpg" alt="Photo 1">
+        <a href="gallery/skogar_lg.jpg" class="glightbox" data-title="Sample Image">
+          <img src="gallery/skogar_sm.jpg" alt="Thumbnail">
         </a>
-        
+      
       </div>
     </section>    
   </main>
@@ -42,6 +46,14 @@
       <a class="footer-links" target="_blank" href="https://www.linkedin.com/in/yourprofile">linkedin</a>
     </nav>
   </footer>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+  <!-- GLightbox JS -->
+  <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+
+  <script>
+  const lightbox = GLightbox({
+    selector: '.glightbox',
+  });
+  </script>
+
 </body>
 </html>
