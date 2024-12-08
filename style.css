@@ -23,7 +23,7 @@ header {
 }
 
 header h1 {
-  font-size: 1rem;
+  font-size: 1.5rem; /* Adjusted for better readability */
 }
 
 header p {
@@ -47,7 +47,7 @@ footer {
   font-size: 0.9rem;
   margin: 1rem 0;
   background: none;
-  padding: 0.5rem 1rem; /* Add spacing around footer */
+  padding: 0.5rem 1rem;
 }
 
 footer .footer-links {
@@ -89,11 +89,6 @@ section {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   max-width: 800px;
   margin-left: 1rem;
-}
-
-/* Skills Section Specific Styling */
-section#skills {
-  max-width: 800px;
 }
 
 /* Section Headers */
@@ -160,13 +155,6 @@ section h2 {
   color: #76c7c0;
 }
 
-/* Experience and Education Entry Styling */
-.education-entry,
-.experience-entry,
-.project-entry {
-  margin-bottom: 2rem;
-}
-
 /* Gallery Section */
 #gallery {
   margin-top: 2rem;
@@ -175,32 +163,21 @@ section h2 {
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   max-width: 800px;
-  margin-left: 1rem;
-}
-
-#gallery h2 {
-  color: #76c7c0;
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  border-bottom: 2px solid #76c7c0;
-  display: inline-block;
-  padding-bottom: 0.3rem;
 }
 
 /* Grid for Images */
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(3, 1fr)); /* Adjust column size */
-  gap: 1rem; /* Reduce spacing between photos */
-  justify-content: center; /* Center-align photos */
-  align-items: center; /* Ensure vertical alignment */
+  grid-template-columns: repeat(3, 1fr); /* Always 3 per row */
+  gap: 1rem; /* Space between images */
+  justify-content: left;
+  align-items: center;
 }
-
 
 .gallery-grid img {
   width: 100%;
-  aspect-ratio: 3 / 2; /* Adjust to your preferred ratio (width:height) */
-  object-fit: cover; /* Keep the image filling the thumbnail box */
+  aspect-ratio: 4 / 3; /* Maintain a consistent aspect ratio */
+  object-fit: cover;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   transition: transform 0.2s, box-shadow 0.2s;
@@ -222,18 +199,43 @@ section h2 {
     font-size: 1.3rem;
   }
 
-  .education-entry h3,
-  .experience-entry h3,
-  .project-entry h3 {
-    font-size: 1.1rem;
-  }
-
   nav {
     right: 1rem;
     font-size: 0.9rem;
   }
 
   .gallery-grid {
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-template-columns: repeat(2, 1fr); /* Adjust to 2 per row on tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-grid {
+    grid-template-columns: 1fr; /* Stack images in 1 column on mobile */
+  }
+}
+
+/* Navigation - Move to Bottom Left for Mobile */
+@media (max-width: 768px) {
+  nav {
+    position: static; /* Remove fixed positioning */
+    display: flex;
+    flex-direction: column; /* Stack links vertically */
+    align-items: flex-start; /* Align links to the left */
+    margin-top: 6rem; /* Add some space from the top content */
+    gap: 0.05rem; /* Reduce spacing between links for compact look */
+    padding-left: 0.5rem; /* Slightly move links inward from the left edge */
+  }
+
+  nav a {
+    font-size: 1rem; /* Adjust font size for readability */
+    color: #dcdcdc; /* Keep consistent text color */
+    text-decoration: none; /* Remove underline */
+    text-align: left; /* Ensure text aligns to the left */
+    line-height: 1.5rem; /* Add consistent spacing between links */
+  }
+
+  nav a:hover {
+    text-decoration: underline; /* Add underline effect on hover */
   }
 }
