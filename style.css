@@ -1,0 +1,236 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #121212;
+  color: #dcdcdc;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header */
+header {
+  text-align: left;
+  margin: 2rem 1rem;
+}
+
+header h1 {
+  font-size: 1rem;
+}
+
+header p {
+  font-size: 1rem;
+  color: #dcdcdc;
+}
+
+/* Main Content */
+main {
+  flex: 1;
+  padding: 1rem;
+  text-align: left;
+}
+
+/* Footer */
+footer {
+  display: flex;
+  justify-content: right;
+  text-align: right;
+  gap: 1rem;
+  font-size: 0.9rem;
+  margin: 1rem 0;
+  background: none; /* Removes any background color */
+  padding: 0; /* Removes extra padding */
+}
+
+footer .footer-links {
+  color: #dcdcdc;
+  text-decoration: none;
+}
+
+footer .footer-links:hover {
+  text-decoration: underline;
+}
+
+/* Navigation - Fixed on the Right */
+nav {
+  position: fixed;
+  top: 50%;
+  right: 2rem; /* Distance from the right edge */
+  transform: translateY(-50%); /* Center vertically */
+  display: flex;
+  flex-direction: column; /* Stack links vertically */
+  gap: 1rem; /* Space between links */
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* General Section Styling */
+section {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: #1a1a1a; /* Subtle section background */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Slight shadow for depth */
+  max-width: 800px; /* Limit the width of the box */
+  margin-left: 1rem; /* Align sections to the left */
+  min-height: 200px; /* Set a minimum height for uniformity */
+}
+
+/* Skills Section Specific Styling */
+section#skills {
+  max-width: 800px; /* Match the width of other sections */
+  min-height: 200px; /* Match the height of other sections */
+}
+
+/* Section Headers */
+section h2 {
+  color: #76c7c0; /* Accent color for section headers */
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #76c7c0; /* Line below header */
+  display: inline-block;
+  padding-bottom: 0.3rem;
+}
+
+/* Subheadings (e.g., Degrees, Jobs) */
+.education-entry h3,
+.experience-entry h3,
+.project-entry h3 {
+  font-size: 1.2rem;
+  color: #ffffff; /* Bold and clear headings */
+  margin-bottom: 0.3rem;
+}
+
+/* Institution and Dates */
+.education-entry .institution,
+.experience-entry .institution,
+.project-entry .institution {
+  font-style: italic;
+  color: #b0b0b0;
+}
+
+.education-entry .dates,
+.experience-entry .dates,
+.project-entry .dates {
+  color: #a0a0a0;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+/* List Styling for Details, Skills, and Coursework */
+.details,
+.skills-list,
+.coursework-list,
+.honors-list {
+  list-style: none; /* Remove default bullets */
+  padding-left: 1.5rem; /* Indent for alignment */
+}
+
+.details li,
+.skills-list li,
+.coursework-list li,
+.honors-list li {
+  margin-bottom: 0.5rem;
+  position: relative;
+  color: #e0e0e0; /* Text color for list items */
+}
+
+/* Custom Bullet Points */
+.details li::before,
+.skills-list li::before,
+.coursework-list li::before,
+.honors-list li::before {
+  content: "•"; /* Use a bullet point */
+  position: absolute;
+  left: -1rem; /* Align bullets with text */
+  color: #76c7c0; /* Accent color for bullets */
+}
+
+/* Experience and Education Entry Styling */
+.education-entry,
+.experience-entry,
+.project-entry {
+  margin-bottom: 2rem; /* Space between entries */
+}
+
+/* Responsive Styling for Mobile */
+@media (max-width: 768px) {
+  section {
+    padding: 1rem; /* Adjust padding for smaller screens */
+  }
+
+  section h2 {
+    font-size: 1.3rem; /* Slightly smaller headers */
+  }
+
+  .education-entry h3,
+  .experience-entry h3,
+  .project-entry h3 {
+    font-size: 1.1rem;
+  }
+
+  nav {
+    right: 1rem; /* Adjust navigation on smaller screens */
+    font-size: 0.9rem;
+  }
+
+  /* Gallery Section */
+  #gallery {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    max-width: 800px;
+    margin-left: 1rem;
+  }
+
+  #gallery h2 {
+    color: #76c7c0;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #76c7c0;
+    display: inline-block;
+    padding-bottom: 0.3rem;
+  }
+
+  /* Grid for Images */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+
+  .gallery-grid img {
+    width: 150px; /* Set a fixed width for thumbnails */
+    height: 100px; /* Set a fixed height for thumbnails */
+    object-fit: cover; /* Crop the image to fit the dimensions without stretching */
+    border-radius: 8px; /* Add rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Add subtle shadow */
+    transition: transform 0.2s, box-shadow 0.2s; /* Add hover effects */
+  }
+  
+  /* Hover Effects */
+  .gallery-grid img:hover {
+    transform: scale(1.05); /* Slight zoom-in effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Darker shadow on hover */
+  }
+  
+}
+
