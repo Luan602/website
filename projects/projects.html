@@ -1,23 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Project 1 - SEPTA Next To Arrive</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="../style.css">
+  <title>Project 1: SEPTA Next To Arrive</title>
+
+  <!-- Inline styling to keep everything in one file -->
   <style>
-    /* Inline styles for the SEPTA section; move to your CSS file if desired */
+    /* Basic reset & body styling */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000; /* black background */
+      color: #fff;           /* white text */
+      font-family: Arial, sans-serif;
+    }
+
+    /* Header styling */
+    header {
+      background-color: #222;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: #fff;
+    }
+
+    /* Main content area */
+    main {
+      margin: 20px;
+    }
+
+    /* SEPTA project container */
     #septa-project {
       background-color: #2c2c2c;
       padding: 20px;
       border-radius: 8px;
-      margin: 20px 0;
+      margin-bottom: 20px;
       color: #fff;
     }
     #septa-project h2 {
       margin-bottom: 1rem;
-      color: #88f1ff;
+      color: #88f1ff; /* teal-ish heading */
     }
+
+    /* Form layout */
     #stationForm {
       margin-bottom: 1rem;
     }
@@ -31,6 +64,8 @@
       padding: 6px;
       border: 1px solid #ccc;
       border-radius: 4px;
+      background-color: #fff; /* white field */
+      color: #000;           /* black text inside the field */
     }
     #stationForm button {
       background-color: #0066cc;
@@ -44,11 +79,15 @@
     #stationForm button:hover {
       background-color: #004a99;
     }
+
+    /* Loading message */
     #loading {
       margin: 1rem 0;
       font-weight: bold;
       color: #fff;
     }
+
+    /* Table styling */
     #septa-table {
       width: 100%;
       border-collapse: collapse;
@@ -67,26 +106,31 @@
     #septa-table th {
       font-weight: bold;
     }
-    main {
+
+    /* Nav styling */
+    nav {
       margin: 20px;
     }
-    header {
-      background-color: #222;
-      color: #fff;
-      padding: 20px;
-      text-align: left;
+    nav a.footer-links {
+      color: #88f1ff;
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: 10px;
     }
-    header p {
-      font-size: 1rem;
-      margin-top: 10px;
+    nav a.footer-links:hover {
+      text-decoration: underline;
+    }
+
+    /* Footer styling */
+    footer {
+      margin: 20px;
+      text-align: center;
     }
   </style>
 </head>
 <body>
   <header>
     <h1>Project 1: SEPTA Next To Arrive</h1>
-    <p>This project fetches real-time SEPTA transit data between two stations using the SEPTA API.</p>
-    <p>I needed an easy way to find the next train between two stations on the SEPTA Regional Rail System, so this helped.</p>
   </header>
 
   <main>
@@ -95,10 +139,22 @@
       <h2>Next To Arrive</h2>
       <form id="stationForm">
         <label for="origin">Origin Station Name:</label>
-        <input type="text" id="origin" name="origin" placeholder="e.g., Trevose" required>
+        <input 
+          type="text" 
+          id="origin" 
+          name="origin" 
+          placeholder="e.g., Trevose" 
+          required
+        >
         <br>
         <label for="destination">Destination Station Name:</label>
-        <input type="text" id="destination" name="destination" placeholder="e.g., 30th Street Station" required>
+        <input 
+          type="text" 
+          id="destination" 
+          name="destination" 
+          placeholder="e.g., 30th Street Station" 
+          required
+        >
         <br>
         <button type="submit">Get Real-Time Data</button>
       </form>
@@ -130,39 +186,43 @@
     <br>
     <a class="footer-links" target="_blank" href="https://www.linkedin.com/in/luan-merolli-75a4161b7/">linkedin</a>
   </nav>
+
   <footer>
     <!-- Optionally add footer content here -->
   </footer>
 
   <script>
-    // Function to fetch SEPTA data using origin and destination station names
+    // Fetch data from the SEPTA Next To Arrive API
     async function fetchSeptaData(origin, destination) {
-      const req3 = 15; // Default value based on sample URL
+      const req3 = 15; // default value
       const API_URL = `https://www3.septa.org/api/NextToArrive/index.php?req1=${encodeURIComponent(origin)}&req2=${encodeURIComponent(destination)}&req3=${req3}`;
       try {
         const response = await fetch(API_URL);
         if (!response.ok) {
-          throw new Error('Network response wasn’t ok');
+          throw new Error('Network response was not ok');
         }
         const data = await response.json();
         return data;
       } catch (error) {
         console.error('Error fetching SEPTA data:', error);
-        return []; // Return empty array on error
+        return [];
       }
     }
 
-    // Function to populate the table with API data
+    // Populate the table with API data
     function populateTable(data) {
       const table = document.getElementById('septa-table');
       const tbody = table.querySelector('tbody');
-      tbody.innerHTML = ''; // Clear existing rows
+      // Clear out any old rows
+      tbody.innerHTML = '';
 
+      // Handle empty or invalid data
       if (!Array.isArray(data) || data.length === 0) {
         tbody.innerHTML = '<tr><td colspan="6">No data available.</td></tr>';
         return;
       }
 
+      // Build rows
       data.forEach(item => {
         const row = document.createElement('tr');
 
@@ -194,25 +254,26 @@
       });
     }
 
-    // Handle form submission
+    // Handle the form submission
     document.getElementById('stationForm').addEventListener('submit', async function(e) {
       e.preventDefault();
 
+      // Grab input values
       const originInput = document.getElementById('origin').value.trim();
       const destinationInput = document.getElementById('destination').value.trim();
 
-      // Update section header with station names
+      // Update section header with chosen stations
       const projectTitle = document.querySelector('#septa-project h2');
       projectTitle.textContent = `Next To Arrive from ${originInput} to ${destinationInput}`;
 
-      // Show loading message and hide table while fetching data
+      // Show loading message, hide table while fetching data
       document.getElementById('loading').style.display = 'block';
       document.getElementById('septa-table').style.display = 'none';
 
       // Fetch data
       const septaData = await fetchSeptaData(originInput, destinationInput);
 
-      // Hide loading message and display the table
+      // Hide loading message and show the table
       document.getElementById('loading').style.display = 'none';
       document.getElementById('septa-table').style.display = 'table';
 
