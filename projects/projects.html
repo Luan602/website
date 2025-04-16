@@ -25,22 +25,32 @@
       width: 100%;
     }
 
+    #stationForm{
+      padding: 0 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
     #stationForm label {
       display: block;
       margin-bottom: 0.3rem;
       font-weight: 500;
       color: #76c7c0;
+      font-size: 1.1rem;
     }
 
     #stationForm input[type="text"] {
       border: 1px solid #76c7c0;
       border-radius: 6px;
-      padding: 10px;
+      padding: 12px 15px;
       background-color: #121212;
       color: #dcdcdc;
-      width: 100%;
-      margin-bottom: 1rem;
+      width: 70%;
+      max-width: 500px;
+      margin-bottom: 0.5rem;
       transition: all 0.3s ease;
+      font-size: 1.1rem;
     }
 
     #stationForm input[type="text"]:focus {
@@ -54,10 +64,12 @@
       color: #121212;
       border: none;
       border-radius: 6px;
-      padding: 10px 18px;
+      padding: 12px 20px;
       cursor: pointer;
       font-weight: bold;
       transition: all 0.2s ease;
+      font-size: 1.1rem;
+      max-width: 250px;
     }
 
     #stationForm button:hover {
@@ -205,6 +217,16 @@
         justify-content: center;
       }
       
+      #stationForm input[type="text"] {
+        width: 100%;
+        max-width: none;
+      }
+      
+      #stationForm button {
+        width: 100%;
+        max-width: none;
+      }
+      
       #septa-table {
         font-size: 0.9rem;
       }
@@ -219,10 +241,6 @@
       
       .schedule-table td {
         padding: 6px 8px !important;
-      }
-      
-      #stationForm button {
-        width: 100%;
       }
     }
     
