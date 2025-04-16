@@ -120,17 +120,21 @@
 
   <script>
     async function fetchSeptaData(origin, destination) {
-      const API_URL = `https://www3.septa.org/api/NextToArrive/index.php?req1=${encodeURIComponent(origin)}&req2=${encodeURIComponent(destination)}&req3=15`;
+      const encodedURL = encodeURIComponent(`https://www3.septa.org/api/NextToArrive/index.php?req1=${origin}&req2=${destination}&req3=15`);
+      const proxyURL = `https://api.allorigins.win/get?url=${encodedURL}`;
+
       try {
-        const response = await fetch(API_URL);
+        const response = await fetch(proxyURL);
         if (!response.ok) throw new Error('Network response error');
-        const data = await response.json();
+        const wrappedData = await response.json();
+        const data = JSON.parse(wrappedData.contents);
         return data;
       } catch (error) {
         console.error(error);
         return null;
       }
     }
+
 
     function populateTable(data) {
       const tbody = document.querySelector('#septa-table tbody');
