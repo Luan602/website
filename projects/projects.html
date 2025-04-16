@@ -2,14 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <!-- Ensures proper mobile scaling -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  
   <link rel="stylesheet" href="../style.css">
   <title>Project 1: SEPTA Next To Arrive</title>
 
   <style>
-    /* Desktop styling for the project container: left aligned */
     #septa-project {
       border: 2px solid #76c7c0;
       padding: 1.5rem;
@@ -17,31 +14,24 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
       background-color: #1a1a1a;
       max-width: 800px;
-      margin: 1rem 0 1rem 1rem; /* top, right, bottom, left */
+      margin: 1rem auto;
     }
 
-    /* Form and input styling */
-    #stationForm {
-      margin-bottom: 1rem;
-    }
     #stationForm label {
-      display: inline-block;
-      width: 160px;
-      margin-bottom: 0.5rem;
+      display: block;
+      margin-bottom: 0.3rem;
     }
+
     #stationForm input[type="text"] {
       border: 1px solid #76c7c0;
       border-radius: 6px;
       padding: 8px;
-      margin-bottom: 1rem;
-      transition: border 0.3s ease;
       background-color: #121212;
       color: #dcdcdc;
+      width: 100%;
+      margin-bottom: 1rem;
     }
-    #stationForm input[type="text"]:focus {
-      border-color: #dcdcdc;
-      outline: none;
-    }
+
     #stationForm button {
       background-color: #76c7c0;
       color: #121212;
@@ -49,52 +39,38 @@
       border-radius: 6px;
       padding: 8px 16px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
     }
+
     #stationForm button:hover {
       background-color: #5bb1a8;
     }
 
-    /* Table styling */
     #septa-table {
       border-collapse: collapse;
       width: 100%;
       margin-top: 1rem;
     }
-    #septa-table th, 
-    #septa-table td {
+
+    #septa-table th, #septa-table td {
       padding: 10px;
       border: 1px solid #76c7c0;
       text-align: left;
-      vertical-align: middle;
     }
+
     #septa-table th {
       background-color: #76c7c0;
       color: #121212;
     }
 
-    /* Loading message */
-    #loading {
+    #loading, #error-msg {
       margin: 1rem 0;
       font-weight: bold;
       color: #fff;
     }
 
-    /* Mobile styling: center the container on mobile */
     @media (max-width: 768px) {
       #septa-project {
-        margin: 1rem auto; /* center horizontally */
         width: 90%;
-      }
-      
-      /* Make labels block-level on mobile for a cleaner look */
-      #stationForm label {
-        width: auto;
-        display: block;
-        margin-bottom: 0.2rem;
-      }
-      #septa-table, #septa-table th, #septa-table td {
-        font-size: 0.9rem;
       }
     }
   </style>
@@ -109,27 +85,16 @@
       <h2>Next To Arrive</h2>
       <form id="stationForm">
         <label for="origin">Starting Station:</label>
-        <input 
-          type="text" 
-          id="origin" 
-          name="origin" 
-          placeholder="e.g., 30th Street Station" 
-          required
-        >
-        <br>
+        <input type="text" id="origin" name="origin" placeholder="e.g., 30th Street Station" required>
+
         <label for="destination">Ending Station:</label>
-        <input 
-          type="text" 
-          id="destination" 
-          name="destination" 
-          placeholder="e.g., Trevose" 
-          required
-        >
-        <br>
+        <input type="text" id="destination" name="destination" placeholder="e.g., Trevose" required>
+
         <button type="submit">Get Real-Time Data</button>
       </form>
 
       <div id="loading" style="display: none;">Loading data... (hang tight!)</div>
+      <div id="error-msg" style="display: none;"></div>
 
       <table id="septa-table" style="display: none;">
         <thead>
@@ -142,115 +107,74 @@
             <th>Direct</th>
           </tr>
         </thead>
-        <tbody>
-          <!-- Data rows will be inserted here -->
-        </tbody>
+        <tbody></tbody>
       </table>
     </section>
   </main>
 
   <nav>
-    <a class="footer-links" href="../index.html">home</a>
-    <br>
-    <a class="footer-links" href="../hobbies/hobbies.html">hobbies</a>
-    <br>
+    <a class="footer-links" href="../index.html">home</a><br>
+    <a class="footer-links" href="../hobbies/hobbies.html">hobbies</a><br>
     <a class="footer-links" target="_blank" href="https://www.linkedin.com/in/luan-merolli-75a4161b7/">linkedin</a>
   </nav>
 
-  <footer>
-    <!-- Optionally add footer content here -->
-  </footer>
-
   <script>
-    // Fetch data from the SEPTA Next To Arrive API
     async function fetchSeptaData(origin, destination) {
-      const req3 = 15; // default value
-      // According to the docs:
-      // req1 = Starting Regional Rail Station, req2 = Ending Regional Rail Station
-      const API_URL = `https://www3.septa.org/api/NextToArrive/index.php?req1=${encodeURIComponent(origin)}&req2=${encodeURIComponent(destination)}&req3=${req3}`;
+      const API_URL = `https://www3.septa.org/api/NextToArrive/index.php?req1=${encodeURIComponent(origin)}&req2=${encodeURIComponent(destination)}&req3=15`;
       try {
         const response = await fetch(API_URL);
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
+        if (!response.ok) throw new Error('Network response error');
         const data = await response.json();
         return data;
       } catch (error) {
-        console.error('Error fetching SEPTA data:', error);
-        return [];
+        console.error(error);
+        return null;
       }
     }
 
-    // Populate the table with API data
     function populateTable(data) {
-      const table = document.getElementById('septa-table');
-      const tbody = table.querySelector('tbody');
-      // Clear out any old rows
+      const tbody = document.querySelector('#septa-table tbody');
       tbody.innerHTML = '';
 
-      // Handle empty or invalid data
-      if (!Array.isArray(data) || data.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="6">No data available.</td></tr>';
+      if (!data || data.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6">No trains found for these stations.</td></tr>';
         return;
       }
 
-      // Build rows
       data.forEach(item => {
-        const row = document.createElement('tr');
-
-        const trainCell = document.createElement('td');
-        trainCell.textContent = item.orig_train;
-        row.appendChild(trainCell);
-
-        const lineCell = document.createElement('td');
-        lineCell.textContent = item.orig_line;
-        row.appendChild(lineCell);
-
-        const departureCell = document.createElement('td');
-        departureCell.textContent = item.orig_departure_time;
-        row.appendChild(departureCell);
-
-        const arrivalCell = document.createElement('td');
-        arrivalCell.textContent = item.orig_arrival_time;
-        row.appendChild(arrivalCell);
-
-        const delayCell = document.createElement('td');
-        delayCell.textContent = item.orig_delay;
-        row.appendChild(delayCell);
-
-        const directCell = document.createElement('td');
-        directCell.textContent = item.isdirect;
-        row.appendChild(directCell);
-
-        tbody.appendChild(row);
+        tbody.innerHTML += `
+          <tr>
+            <td>${item.orig_train}</td>
+            <td>${item.orig_line}</td>
+            <td>${item.orig_departure_time}</td>
+            <td>${item.orig_arrival_time}</td>
+            <td>${item.orig_delay}</td>
+            <td>${item.isdirect === 'true' ? 'Yes' : 'No'}</td>
+          </tr>
+        `;
       });
     }
 
-    // Handle the form submission
-    document.getElementById('stationForm').addEventListener('submit', async function(e) {
+    document.getElementById('stationForm').addEventListener('submit', async (e) => {
       e.preventDefault();
-
-      // Grab input values
-      const originInput = document.getElementById('origin').value.trim();
-      const destinationInput = document.getElementById('destination').value.trim();
-
-      // Update section header with chosen stations
-      const projectTitle = document.querySelector('#septa-project h2');
-      projectTitle.textContent = `Next To Arrive from ${originInput} to ${destinationInput}`;
-
-      // Show loading message, hide table while fetching data
+      const origin = document.getElementById('origin').value;
+      const destination = document.getElementById('destination').value;
       document.getElementById('loading').style.display = 'block';
+      document.getElementById('error-msg').style.display = 'none';
       document.getElementById('septa-table').style.display = 'none';
 
-      // Fetch data
-      const septaData = await fetchSeptaData(originInput, destinationInput);
-
-      // Hide loading message and show the table
+      const data = await fetchSeptaData(origin, destination);
       document.getElementById('loading').style.display = 'none';
-      document.getElementById('septa-table').style.display = 'table';
 
-      // Populate table
-      populateTable(septaData);
+      if (data === null) {
+        document.getElementById('error-msg').textContent = 'Error fetching data, please try again.';
+        document.getElementById('error-msg').style.display = 'block';
+        return;
+      }
+
+      document.querySelector('#septa-project h2').textContent = `Next To Arrive: ${origin} ➡️ ${destination}`;
+      document.getElementById('septa-table').style.display = 'table';
+      populateTable(data);
     });
   </script>
 </body>
