@@ -205,6 +205,16 @@
       transform: translateY(0);
     }
 
+    .on-time {
+      color: #4caf50; /* Green color for on time */
+      font-weight: bold;
+    }
+    
+    .delayed {
+      color: #ff5252; /* Red color for delays */
+      font-weight: bold;
+    }
+
     @media (max-width: 768px) {
       #septa-project {
         width: 95%;
@@ -394,13 +404,16 @@
       }
     
       data.forEach(item => {
+        // Determine delay class
+        const delayClass = item.orig_delay === 'On time' ? 'on-time' : 'delayed';
+        
         const row = document.createElement('tr');
         row.innerHTML = `
           <td><a href="#" class="train-link" onclick="event.preventDefault(); toggleSchedule('${item.orig_train}', this)">${item.orig_train}</a></td>
           <td>${item.orig_line}</td>
           <td>${item.orig_departure_time}</td>
           <td>${item.orig_arrival_time}</td>
-          <td>${item.orig_delay}</td>
+          <td class="${delayClass}">${item.orig_delay}</td>
           <td>${item.isdirect === 'true' ? 'Yes' : 'No'}</td>
         `;
         tbody.appendChild(row);
