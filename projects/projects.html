@@ -18,11 +18,17 @@
       margin: 1rem 0;
     }
 
+    .red{
+        color: #ff2600;
+        font-weight: bold;
+      }
+
     main {
       display: flex;
       justify-content: flex-start;
       padding: 0 2rem;
       width: 100%;
+      
     }
 
     #stationForm{
@@ -284,6 +290,16 @@
 <body>
   <header>
     <h1>Project 1: SEPTA Next To Arrive</h1>
+    <hr>
+    <h3>This project serves to provide real-time train arrival information for SEPTA riders.</h1>
+    <p>Personally, I use this project to solve the problem of not having an easy station to station schedule system that gives me the information I need quickly and efficiently.</p>
+    <p>It uses the SEPTA Next To Arrive API to fetch real-time data and display it in a user-friendly table format.</p>
+    <hr>
+    <i> 
+      <p>Click on a train number to view its schedule.</p>
+    </i>
+    <hr>
+    <p class="red">Note: This project is a work in progress and may not cover all edge cases. Also due to SEPTA API restrictions, you need to enter the full (case-sensitive) station name.
   </header>
 
   <main>
