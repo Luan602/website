@@ -3,124 +3,156 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" href="../style.css">
   <title>Project 1: SEPTA Next To Arrive</title>
 
   <style>
+    :root {
+      --teal: #76c7c0;
+      --teal-dark: #5bb1a8;
+      --teal-dim: rgba(118, 199, 192, 0.2);
+      --teal-dimmer: rgba(118, 199, 192, 0.05);
+      --bg: #121212;
+      --bg-card: #1a1a1a;
+      --bg-row-even: #222;
+      --bg-row-hover: #2d2d2d;
+      --bg-schedule: #1c3231;
+      --text: #dcdcdc;
+      --border: #2a2a2a;
+      --red: #ff2600;
+      --green: #4caf50;
+      --error-red: #ff5252;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      line-height: 1.5;
+    }
+
+    header {
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    header h1 { margin-top: 0; color: var(--teal); }
+    header hr { border-color: var(--border); }
+    header p { margin: 0.4rem 0; }
+    header i p { color: #aaa; font-size: 0.95rem; }
+
+    .red { color: var(--red); font-weight: bold; }
+
+    main {
+      display: flex;
+      justify-content: flex-start;
+      padding: 1.5rem 2rem;
+      width: 100%;
+    }
+
     #septa-project {
-      border: 2px solid #76c7c0;
+      border: 2px solid var(--teal);
       padding: 2rem;
       border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-      background-color: #1a1a1a;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      background-color: var(--bg-card);
       max-width: 1000px;
       width: 90%;
       margin: 1rem 0;
     }
 
-    .red{
-        color: #ff2600;
-        font-weight: bold;
-      }
-
-    main {
-      display: flex;
-      justify-content: flex-start;
-      padding: 0 2rem;
-      width: 100%;
-      
-    }
-
-    #stationForm{
+    /* ── Form ── */
+    #stationForm {
       padding: 0 1rem;
       display: flex;
       flex-direction: column;
       gap: 1rem;
     }
 
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
     #stationForm label {
       display: block;
-      margin-bottom: 0.3rem;
       font-weight: 500;
-      color: #76c7c0;
-      font-size: 1.1rem;
+      color: var(--teal);
+      font-size: 1.05rem;
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
     #stationForm input[type="text"] {
-      border: 1px solid #76c7c0;
+      border: 1px solid var(--teal);
       border-radius: 6px;
-      padding: 12px 15px;
-      background-color: #121212;
-      color: #dcdcdc;
+      padding: 11px 15px;
+      background-color: var(--bg);
+      color: var(--text);
       width: 70%;
-      max-width: 500px;
-      margin-bottom: 0.5rem;
+      max-width: 460px;
       transition: all 0.3s ease;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
     }
 
     #stationForm input[type="text"]:focus {
-      border-color: #5bb1a8;
-      box-shadow: 0 0 0 2px rgba(118, 199, 192, 0.3);
+      border-color: var(--teal-dark);
+      box-shadow: 0 0 0 2px var(--teal-dim);
       outline: none;
     }
 
+    /* validity indicator dot */
+    .valid-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--border);
+      transition: background 0.25s;
+      flex-shrink: 0;
+    }
+    .valid-dot.valid   { background: var(--green); }
+    .valid-dot.invalid { background: var(--error-red); }
+
+    .field-hint {
+      font-size: 0.8rem;
+      color: #888;
+      padding-left: 2px;
+    }
+
     #stationForm button {
-      background-color: #76c7c0;
-      color: #121212;
+      background-color: var(--teal);
+      color: var(--bg);
       border: none;
       border-radius: 6px;
       padding: 12px 20px;
       cursor: pointer;
       font-weight: bold;
       transition: all 0.2s ease;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       max-width: 250px;
     }
-
     #stationForm button:hover {
-      background-color: #5bb1a8;
+      background-color: var(--teal-dark);
       transform: translateY(-2px);
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    #stationForm button:active { transform: translateY(0); }
+    #stationForm button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
     }
 
-    #stationForm button:active {
-      transform: translateY(0);
-    }
-
-    #septa-table {
-      border-collapse: separate;
-      border-spacing: 0;
-      width: 100%;
-      margin-top: 1.5rem;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    }
-
-    #septa-table th, #septa-table td {
-      padding: 12px;
-      border: 1px solid #2a2a2a;
-      text-align: left;
-    }
-
-    #septa-table th {
-      background-color: #76c7c0;
-      color: #121212;
-      font-weight: bold;
-      text-transform: uppercase;
-      font-size: 0.9rem;
-      letter-spacing: 0.5px;
-    }
-
-    #septa-table tr:nth-child(even) {
-      background-color: #222;
-    }
-
-    #septa-table tr:hover {
-      background-color: #2d2d2d;
-    }
-
+    /* ── Status messages ── */
     #loading, #error-msg {
       margin: 1.5rem 0;
       font-weight: bold;
@@ -129,70 +161,68 @@
       padding: 10px;
       border-radius: 6px;
     }
+    #loading   { background-color: var(--teal-dim); }
+    #error-msg { background-color: rgba(255,99,71,0.2); color: #ff6347; }
 
-    #loading {
-      background-color: rgba(118, 199, 192, 0.2);
-    }
-
-    #error-msg {
-      background-color: rgba(255, 99, 71, 0.2);
-      color: #ff6347;
-    }
-
-    .schedule-details {
-      margin: 0;
+    /* ── Main results table ── */
+    #septa-table {
+      border-collapse: separate;
+      border-spacing: 0;
       width: 100%;
-      color: #dcdcdc;
-      border: none;
+      margin-top: 1.5rem;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
 
-    .schedule-row {
-      background-color: #1c3231 !important;
-      transition: all 0.3s ease;
+    #septa-table th, #septa-table td {
+      padding: 12px;
+      border: 1px solid var(--border);
+      text-align: left;
     }
-    
-    .schedule-row td {
-      padding: 0 !important;
+    #septa-table th {
+      background-color: var(--teal);
+      color: var(--bg);
+      font-weight: bold;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
     }
-    
+    #septa-table tr:nth-child(even) { background-color: var(--bg-row-even); }
+    #septa-table tr:hover           { background-color: var(--bg-row-hover); }
+
+    /* ── Expandable schedule rows ── */
+    .schedule-row { background-color: var(--bg-schedule) !important; }
+    .schedule-row td { padding: 0 !important; }
+
     .schedule-table {
       width: 100%;
       border-collapse: collapse;
       margin: 0;
-      background-color: rgba(118, 199, 192, 0.05);
+      background-color: var(--teal-dimmer);
     }
-    
     .schedule-table th {
-      background-color: rgba(118, 199, 192, 0.2) !important;
-      color: #76c7c0 !important;
+      background-color: var(--teal-dim) !important;
+      color: var(--teal) !important;
       font-weight: bold;
       padding: 10px !important;
       text-align: center !important;
       letter-spacing: 1px;
-      border-bottom: 2px solid #76c7c0 !important;
+      border-bottom: 2px solid var(--teal) !important;
     }
-    
     .schedule-table td {
       padding: 8px 12px !important;
       text-align: left;
       border: none;
       border-bottom: 1px solid #333 !important;
     }
-    
-    .schedule-table tr:last-child td {
-      border-bottom: none !important;
-    }
-    
-    .schedule-table tr:nth-child(even) {
-      background-color: rgba(118, 199, 192, 0.05);
-    }
-    
-    .schedule-table tr:hover {
-      background-color: rgba(118, 199, 192, 0.1);
-    }
-    
+    .schedule-table tr:last-child td { border-bottom: none !important; }
+    .schedule-table tr:nth-child(even) { background-color: var(--teal-dimmer); }
+    .schedule-table tr:hover           { background-color: var(--teal-dim); }
+
+    /* ── Train link ── */
     .train-link {
-      color: #76c7c0;
+      color: var(--teal);
       text-decoration: none;
       cursor: pointer;
       font-weight: bold;
@@ -201,303 +231,470 @@
       padding: 2px 6px;
       border-radius: 4px;
     }
-    
     .train-link:hover {
-      background-color: rgba(118, 199, 192, 0.2);
+      background-color: var(--teal-dim);
       transform: translateY(-1px);
     }
-    
-    .train-link:active {
-      transform: translateY(0);
-    }
 
-    .on-time {
-      color: #4caf50; /* Green color for on time */
-      font-weight: bold;
-    }
-    
-    .delayed {
-      color: #ff5252; /* Red color for delays */
-      font-weight: bold;
-    }
+    /* ── Status colours ── */
+    .on-time { color: var(--green); font-weight: bold; }
+    .delayed  { color: var(--error-red); font-weight: bold; }
 
+    /* ── Nav / footer ── */
+    nav {
+      padding: 1rem 2rem 2rem;
+      line-height: 2;
+    }
+    .footer-links {
+      color: var(--teal);
+      text-decoration: none;
+    }
+    .footer-links:hover { text-decoration: underline; }
+
+    /* ── Responsive ── */
     @media (max-width: 768px) {
-      #septa-project {
-        width: 95%;
-        padding: 1.5rem;
-        margin: 1rem auto;
-      }
-
-      main {
-        padding: 0 1rem;
-        justify-content: center;
-      }
-      
-      #stationForm input[type="text"] {
-        width: 100%;
-        max-width: none;
-      }
-      
-      #stationForm button {
-        width: 100%;
-        max-width: none;
-      }
-      
-      #septa-table {
-        font-size: 0.9rem;
-      }
-      
-      #septa-table th, #septa-table td {
-        padding: 8px;
-      }
-      
-      .schedule-table {
-        font-size: 0.85rem;
-      }
-      
-      .schedule-table td {
-        padding: 6px 8px !important;
-      }
+      #septa-project { width: 95%; padding: 1.5rem; margin: 1rem auto; }
+      main { padding: 0 1rem; justify-content: center; }
+      #stationForm input[type="text"] { width: 100%; max-width: none; }
+      #stationForm button { width: 100%; max-width: none; }
+      #septa-table { font-size: 0.9rem; }
+      #septa-table th, #septa-table td { padding: 8px; }
+      .schedule-table { font-size: 0.85rem; }
+      .schedule-table td { padding: 6px 8px !important; }
     }
-    
     @media (max-width: 480px) {
-      #septa-table {
-        font-size: 0.8rem;
-      }
-      
-      #septa-table th, #septa-table td {
-        padding: 6px 4px;
-      }
-      
-      #septa-table th {
-        font-size: 0.75rem;
-      }
-      
-      .schedule-table th {
-        font-size: 0.8rem;
-      }
-      
-      .schedule-table td {
-        padding: 6px 4px !important;
-      }
-      
-      .train-link {
-        padding: 2px 4px;
-      }
+      #septa-table { font-size: 0.8rem; }
+      #septa-table th, #septa-table td { padding: 6px 4px; }
+      #septa-table th { font-size: 0.75rem; }
+      .schedule-table th { font-size: 0.8rem; }
+      .schedule-table td { padding: 6px 4px !important; }
+      .train-link { padding: 2px 4px; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Project 1: SEPTA Next To Arrive</h1>
-    <hr>
-    <h3>This project serves to provide real-time train arrival information for SEPTA riders.</h1>
-    <p>Personally, I use this project to solve the problem of not having an easy station to station schedule system that gives me the information I need quickly and efficiently.</p>
-    <p>It uses the SEPTA Next To Arrive API to fetch real-time data and display it in a user-friendly table format.</p>
-    <hr>
-    <i> 
-      <p>Click on a train number to view its schedule.</p>
-    </i>
-    <hr>
-    <p class="red">Note: This project is a work in progress and may not cover all edge cases. Also due to SEPTA API restrictions, you need to enter the full (case-sensitive) station name.
-  </header>
 
-  <main>
-    <section id="septa-project">
-      <h2>Next To Arrive</h2>
-      <form id="stationForm">
+<header>
+  <h1>Project 1: SEPTA Next To Arrive</h1>
+  <hr>
+  <h3>Real-time train arrival information for SEPTA Regional Rail riders.</h3>
+  <p>Uses the SEPTA Next To Arrive API to fetch real-time data and display it in a user-friendly table.</p>
+  <p>Personally built to solve the problem of not having a quick, efficient station-to-station schedule.</p>
+  <hr>
+  <i><p>Start typing a station name — suggestions will appear. Click a train number to view its full schedule.</p></i>
+  <hr>
+</header>
+
+<main>
+  <section id="septa-project">
+    <h2>Next To Arrive</h2>
+
+    <form id="stationForm">
+
+      <div class="field-group">
         <label for="origin">Starting Station:</label>
-        <input type="text" id="origin" name="origin" placeholder="e.g., 30th Street Station" required>
+        <div class="input-wrapper">
+          <input type="text" id="origin" name="origin"
+                 list="stations-list"
+                 placeholder="e.g., 30th Street Station"
+                 autocomplete="off" required>
+          <span class="valid-dot" id="origin-dot"></span>
+        </div>
+        <span class="field-hint">Type to search — select from the dropdown for exact match</span>
+      </div>
 
+      <div class="field-group">
         <label for="destination">Ending Station:</label>
-        <input type="text" id="destination" name="destination" placeholder="e.g., Trevose" required>
+        <div class="input-wrapper">
+          <input type="text" id="destination" name="destination"
+                 list="stations-list"
+                 placeholder="e.g., Trevose"
+                 autocomplete="off" required>
+          <span class="valid-dot" id="destination-dot"></span>
+        </div>
+        <span class="field-hint">Type to search — select from the dropdown for exact match</span>
+      </div>
 
-        <button type="submit">Get Real-Time Data</button>
-      </form>
+      <!-- Full official station parameter list from www3.septa.org/VIRegionalRail.html -->
+      <datalist id="stations-list">
+        <option value="9th St">9th Street Station</option>
+        <option value="30th Street Station">30th Street Station</option>
+        <option value="49th St">49th Street</option>
+        <option value="Airport Terminal A">Airport Terminal A</option>
+        <option value="Airport Terminal B">Airport Terminal B</option>
+        <option value="Airport Terminal C-D">Airport Terminals C &amp; D</option>
+        <option value="Airport Terminal E-F">Airport Terminals E &amp; F</option>
+        <option value="Allegheny">Allegheny</option>
+        <option value="Allen Lane">Allen Lane</option>
+        <option value="Ambler">Ambler</option>
+        <option value="Angora">Angora</option>
+        <option value="Ardmore">Ardmore</option>
+        <option value="Ardsley">Ardsley</option>
+        <option value="Bala">Bala</option>
+        <option value="Berwyn">Berwyn</option>
+        <option value="Bethayres">Bethayres</option>
+        <option value="Bridesburg">Bridesburg</option>
+        <option value="Bristol">Bristol</option>
+        <option value="Bryn Mawr">Bryn Mawr</option>
+        <option value="Carpenter">Carpenter</option>
+        <option value="Chalfont">Chalfont</option>
+        <option value="Chelten Avenue">Chelten Avenue</option>
+        <option value="Cheltenham">Cheltenham</option>
+        <option value="Chester TC">Chester Transportation Center</option>
+        <option value="Chestnut Hill East">Chestnut Hill East</option>
+        <option value="Chestnut Hill West">Chestnut Hill West</option>
+        <option value="Churchmans Crossing">Churchmans Crossing</option>
+        <option value="Claymont">Claymont</option>
+        <option value="Clifton-Aldan">Clifton-Aldan</option>
+        <option value="Colmar">Colmar</option>
+        <option value="Conshohocken">Conshohocken</option>
+        <option value="Cornwells Heights">Cornwells Heights</option>
+        <option value="Crestmont">Crestmont</option>
+        <option value="Croydon">Croydon</option>
+        <option value="Crum Lynne">Crum Lynne</option>
+        <option value="Curtis Park">Curtis Park</option>
+        <option value="Cynwyd">Cynwyd</option>
+        <option value="Darby">Darby</option>
+        <option value="Daylesford">Daylesford</option>
+        <option value="Delaware Valley College">Delaware Valley College</option>
+        <option value="Devon">Devon</option>
+        <option value="Downingtown">Downingtown</option>
+        <option value="Doylestown">Doylestown</option>
+        <option value="East Falls">East Falls</option>
+        <option value="Eastwick Station">Eastwick Station</option>
+        <option value="Eddington">Eddington</option>
+        <option value="Eddystone">Eddystone</option>
+        <option value="Elkins Park">Elkins Park</option>
+        <option value="Elm St">Elm Street, Norristown</option>
+        <option value="Elwyn Station">Elwyn</option>
+        <option value="Exton">Exton</option>
+        <option value="Fern Rock TC">Fern Rock Transportation Center</option>
+        <option value="Fernwood">Fernwood–Yeadon</option>
+        <option value="Folcroft">Folcroft</option>
+        <option value="Forest Hills">Forest Hills</option>
+        <option value="Ft Washington">Fort Washington</option>
+        <option value="Fortuna">Fortuna</option>
+        <option value="Fox Chase">Fox Chase</option>
+        <option value="Germantown">Germantown</option>
+        <option value="Gladstone">Gladstone</option>
+        <option value="Glenolden">Glenolden</option>
+        <option value="Glenside">Glenside</option>
+        <option value="Gravers">Gravers</option>
+        <option value="Gwynedd Valley">Gwynedd Valley</option>
+        <option value="Hatboro">Hatboro</option>
+        <option value="Haverford">Haverford</option>
+        <option value="Highland">Highland</option>
+        <option value="Highland Ave">Highland Avenue</option>
+        <option value="Holmesburg Jct">Holmesburg Junction</option>
+        <option value="Ivy Ridge">Ivy Ridge</option>
+        <option value="Jefferson Station">Jefferson Station (Market East)</option>
+        <option value="Jenkintown-Wyncote">Jenkintown-Wyncote</option>
+        <option value="Langhorne">Langhorne</option>
+        <option value="Lansdale">Lansdale</option>
+        <option value="Lansdowne">Lansdowne</option>
+        <option value="Lawndale">Lawndale</option>
+        <option value="Levittown">Levittown</option>
+        <option value="Link Belt">Link Belt</option>
+        <option value="Main St">Main Street, Norristown</option>
+        <option value="Malvern">Malvern</option>
+        <option value="Manayunk">Manayunk</option>
+        <option value="Marcus Hook">Marcus Hook</option>
+        <option value="Meadowbrook">Meadowbrook</option>
+        <option value="Media">Media</option>
+        <option value="Melrose Park">Melrose Park</option>
+        <option value="Merion">Merion</option>
+        <option value="Miquon">Miquon</option>
+        <option value="Morton">Morton</option>
+        <option value="Mt Airy">Mount Airy</option>
+        <option value="Moylan-Rose Valley">Moylan-Rose Valley</option>
+        <option value="Narberth">Narberth</option>
+        <option value="Neshaminy Falls">Neshaminy Falls</option>
+        <option value="New Britain">New Britain</option>
+        <option value="Newark">Newark</option>
+        <option value="Noble">Noble</option>
+        <option value="Norristown TC">Norristown Transportation Center</option>
+        <option value="North Broad St">North Broad</option>
+        <option value="North Hills">North Hills</option>
+        <option value="North Philadelphia">North Philadelphia</option>
+        <option value="North Wales">North Wales</option>
+        <option value="Norwood">Norwood</option>
+        <option value="Olney">Olney</option>
+        <option value="Oreland">Oreland</option>
+        <option value="Overbrook">Overbrook</option>
+        <option value="Paoli">Paoli</option>
+        <option value="Penllyn">Penllyn</option>
+        <option value="Pennbrook">Pennbrook</option>
+        <option value="Penn Medicine Station">Penn Medicine Station (University City)</option>
+        <option value="Philmont">Philmont</option>
+        <option value="Primos">Primos</option>
+        <option value="Prospect Park">Prospect Park</option>
+        <option value="Queen Lane">Queen Lane</option>
+        <option value="Radnor">Radnor</option>
+        <option value="Ridley Park">Ridley Park</option>
+        <option value="Rosemont">Rosemont</option>
+        <option value="Roslyn">Roslyn</option>
+        <option value="Rydal">Rydal</option>
+        <option value="Ryers">Ryers</option>
+        <option value="Secane">Secane</option>
+        <option value="Sedgwick">Sedgwick</option>
+        <option value="Sharon Hill">Sharon Hill</option>
+        <option value="Somerton">Somerton</option>
+        <option value="Spring Mill">Spring Mill</option>
+        <option value="St. Davids">St. Davids</option>
+        <option value="St. Martins">St. Martins</option>
+        <option value="Stenton">Stenton</option>
+        <option value="Strafford">Strafford</option>
+        <option value="Suburban Station">Suburban Station</option>
+        <option value="Swarthmore">Swarthmore</option>
+        <option value="Tacony">Tacony</option>
+        <option value="Temple U">Temple University</option>
+        <option value="Thorndale">Thorndale</option>
+        <option value="Torresdale">Torresdale</option>
+        <option value="Trenton">Trenton Transit Center</option>
+        <option value="Trevose">Trevose</option>
+        <option value="Tulpehocken">Tulpehocken</option>
+        <option value="Upsal">Upsal</option>
+        <option value="Villanova">Villanova</option>
+        <option value="Wallingford">Wallingford</option>
+        <option value="Warminster">Warminster</option>
+        <option value="Washington Lane">Washington Lane</option>
+        <option value="Wayne">Wayne</option>
+        <option value="Wayne Jct">Wayne Junction</option>
+        <option value="West Trenton">West Trenton</option>
+        <option value="Whitford">Whitford</option>
+        <option value="Willow Grove">Willow Grove</option>
+        <option value="Wilmington">Wilmington</option>
+        <option value="Wissahickon">Wissahickon</option>
+        <option value="Wister">Wister</option>
+        <option value="Woodbourne">Woodbourne</option>
+        <option value="Wyndmoor">Wyndmoor</option>
+        <option value="Wynnefield Avenue">Wynnefield Avenue</option>
+        <option value="Wynnewood">Wynnewood</option>
+        <option value="Yardley">Yardley</option>
+      </datalist>
 
-      <div id="loading" style="display: none;">Loading data... (hang tight!)</div>
-      <div id="error-msg" style="display: none;"></div>
+      <button type="submit" id="submit-btn">Get Real-Time Data</button>
+    </form>
 
-      <table id="septa-table" style="display: none;">
-        <thead>
-          <tr>
-            <th>Train</th>
-            <th>Line</th>
-            <th>Departure</th>
-            <th>Arrival</th>
-            <th>Delay</th>
-            <th>Direct</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </section>
-  </main>
+    <div id="loading" style="display:none;">Loading data… (hang tight!)</div>
+    <div id="error-msg" style="display:none;"></div>
 
-  <nav>
-    <a class="footer-links" href="../index.html">home</a><br>
-    <a class="footer-links" href="../hobbies/hobbies.html">hobbies</a><br>
-    <a class="footer-links" target="_blank" href="https://www.linkedin.com/in/luan-merolli-75a4161b7/">linkedin</a>
-  </nav>
+    <table id="septa-table" style="display:none;">
+      <thead>
+        <tr>
+          <th>Train</th>
+          <th>Line</th>
+          <th>Departure</th>
+          <th>Arrival</th>
+          <th>Delay</th>
+          <th>Direct</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
+</main>
 
-  <script>
-    async function fetchSeptaData(origin, destination) {
-      const encodedURL = encodeURIComponent(`https://www3.septa.org/api/NextToArrive/index.php?req1=${origin}&req2=${destination}&req3=15`);
-      const proxyURL = `https://api.allorigins.win/get?url=${encodedURL}`;
-    
-      try {
-        const response = await fetch(proxyURL);
-        if (!response.ok) throw new Error('Network response error');
-        const wrappedData = await response.json();
-        const data = JSON.parse(wrappedData.contents);
-        return data;
-      } catch (error) {
-        console.error(error);
-        return null;
-      }
+<nav>
+  <a class="footer-links" href="../index.html">home</a><br>
+  <a class="footer-links" href="../hobbies/hobbies.html">hobbies</a><br>
+  <a class="footer-links" target="_blank" href="https://www.linkedin.com/in/luan-merolli-75a4161b7/">linkedin</a>
+</nav>
+
+<script>
+  // ── Build a Set of valid API parameter values for instant validation ──
+  const VALID_STATIONS = new Set(
+    [...document.querySelectorAll('#stations-list option')].map(o => o.value)
+  );
+
+  function setDotState(dotEl, value) {
+    dotEl.classList.remove('valid', 'invalid');
+    if (value === '') return;
+    dotEl.classList.add(VALID_STATIONS.has(value) ? 'valid' : 'invalid');
+  }
+
+  const originInput      = document.getElementById('origin');
+  const destinationInput = document.getElementById('destination');
+  const originDot        = document.getElementById('origin-dot');
+  const destinationDot   = document.getElementById('destination-dot');
+  const submitBtn        = document.getElementById('submit-btn');
+
+  originInput.addEventListener('input',      () => setDotState(originDot,      originInput.value));
+  destinationInput.addEventListener('input', () => setDotState(destinationDot, destinationInput.value));
+  // Datalist selection fires 'change' on some browsers
+  originInput.addEventListener('change',      () => setDotState(originDot,      originInput.value));
+  destinationInput.addEventListener('change', () => setDotState(destinationDot, destinationInput.value));
+
+  // ── API helpers ──
+  async function fetchSeptaData(origin, destination) {
+    const targetURL    = `https://www3.septa.org/api/NextToArrive/index.php?req1=${encodeURIComponent(origin)}&req2=${encodeURIComponent(destination)}&req3=15`;
+    const proxyURL     = `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(targetURL)}`;
+    try {
+      const res = await fetch(proxyURL);
+      if (!res.ok) throw new Error('Network response error');
+      return await res.json();
+    } catch (err) {
+      console.error(err);
+      return null;
     }
-    
-    async function fetchTrainSchedule(trainNum) {
-      const encodedURL = encodeURIComponent(`https://www3.septa.org/api/RRSchedules/index.php?req1=${trainNum}`);
-      const proxyURL = `https://api.allorigins.win/get?url=${encodedURL}`;
-    
-      try {
-        const response = await fetch(proxyURL);
-        if (!response.ok) throw new Error('Network response error');
-        const wrappedData = await response.json();
-        const data = JSON.parse(wrappedData.contents);
-        return data;
-      } catch (error) {
-        console.error(error);
-        return null;
-      }
-    }
-    
-    function displayTrainSchedule(schedule, trainNum) {
-      const scheduleDiv = document.createElement('div');
-      scheduleDiv.classList.add('schedule-details');
-      
-      if (!schedule || schedule.length === 0) {
-        scheduleDiv.textContent = "No schedule found for train " + trainNum;
-        return scheduleDiv;
-      }
+  }
 
-      const table = document.createElement('table');
-      table.classList.add('schedule-table');
-      
-      // Add header
-      const thead = document.createElement('thead');
-      const headerRow = document.createElement('tr');
-      headerRow.innerHTML = `
-        <th colspan="2">Train ${trainNum} Schedule</th>
-      `;
-      thead.appendChild(headerRow);
-      table.appendChild(thead);
-      
-      // Add schedule rows
-      const tbody = document.createElement('tbody');
-      schedule.forEach(stop => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td><strong>${stop.station}</strong></td>
-          <td>${stop.sched_tm}</td>
-        `;
-        tbody.appendChild(row);
-      });
-      
-      table.appendChild(tbody);
-      scheduleDiv.appendChild(table);
-      return scheduleDiv;
+  async function fetchTrainSchedule(trainNum) {
+    const targetURL = `https://www3.septa.org/api/RRSchedules/index.php?req1=${encodeURIComponent(trainNum)}`;
+    const proxyURL  = `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(targetURL)}`;
+    try {
+      const res = await fetch(proxyURL);
+      if (!res.ok) throw new Error('Network response error');
+      return await res.json();
+    } catch (err) {
+      console.error(err);
+      return null;
     }
-    
-    function populateTable(data) {
-      const tbody = document.querySelector('#septa-table tbody');
-      tbody.innerHTML = '';
-    
-      if (!data || data.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="6">No trains found for these stations.</td></tr>';
-        return;
-      }
-    
-      data.forEach(item => {
-        // Determine delay class
-        const delayClass = item.orig_delay === 'On time' ? 'on-time' : 'delayed';
-        
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td><a href="#" class="train-link" onclick="event.preventDefault(); toggleSchedule('${item.orig_train}', this)">${item.orig_train}</a></td>
-          <td>${item.orig_line}</td>
-          <td>${item.orig_departure_time}</td>
-          <td>${item.orig_arrival_time}</td>
-          <td class="${delayClass}">${item.orig_delay}</td>
-          <td>${item.isdirect === 'true' ? 'Yes' : 'No'}</td>
-        `;
-        tbody.appendChild(row);
-      });
+  }
+
+  // ── Render expanded schedule ──
+  function buildScheduleContent(schedule, trainNum) {
+    const div = document.createElement('div');
+    div.className = 'schedule-details';
+
+    if (!schedule || schedule.length === 0) {
+      div.textContent = `No schedule data found for train ${trainNum}.`;
+      return div;
     }
 
-    async function toggleSchedule(trainNum, link) {
-      const row = link.closest('tr');
-      const nextRow = row.nextElementSibling;
-      
-      // Check if the schedule row already exists
-      if (nextRow && nextRow.classList.contains('schedule-row')) {
-        // If it exists, toggle its visibility
-        if (nextRow.style.display === 'table-row') {
-          nextRow.style.display = 'none';
-        } else {
-          nextRow.style.display = 'table-row';
-        }
-      } else {
-        // If it doesn't exist, create it
-        const loadingCell = document.createElement('td');
-        loadingCell.colSpan = 6;
-        loadingCell.textContent = 'Loading schedule...';
-        
-        const scheduleRow = document.createElement('tr');
-        scheduleRow.classList.add('schedule-row');
-        scheduleRow.appendChild(loadingCell);
-        scheduleRow.style.display = 'table-row';
-        
-        // Insert after the train row
-        if (row.nextSibling) {
-          row.parentNode.insertBefore(scheduleRow, row.nextSibling);
-        } else {
-          row.parentNode.appendChild(scheduleRow);
-        }
-        
-        // Fetch and display the schedule
-        const scheduleData = await fetchTrainSchedule(trainNum);
-        const scheduleDetails = displayTrainSchedule(scheduleData, trainNum);
-        
-        loadingCell.innerHTML = '';
-        loadingCell.appendChild(scheduleDetails);
-        scheduleDetails.style.display = 'block';
-      }
-    }
-    
-    document.getElementById('stationForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const origin = document.getElementById('origin').value;
-      const destination = document.getElementById('destination').value;
-      document.getElementById('loading').textContent = 'Loading data... (hang tight!)';
-      document.getElementById('loading').style.display = 'block';
-      document.getElementById('error-msg').style.display = 'none';
-      document.getElementById('septa-table').style.display = 'none';
-    
-      const data = await fetchSeptaData(origin, destination);
-      document.getElementById('loading').style.display = 'none';
-    
-      if (data === null) {
-        document.getElementById('error-msg').textContent = 'Error fetching data, please try again.';
-        document.getElementById('error-msg').style.display = 'block';
-        return;
-      }
-    
-      document.querySelector('#septa-project h2').textContent = `Next To Arrive: ${origin} ➡️ ${destination}`;
-      document.getElementById('septa-table').style.display = 'table';
-      populateTable(data);
+    const table = document.createElement('table');
+    table.className = 'schedule-table';
+
+    const thead = document.createElement('thead');
+    thead.innerHTML = `<tr><th colspan="2">Train ${trainNum} — Full Schedule</th></tr>`;
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+    schedule.forEach(stop => {
+      const row = document.createElement('tr');
+      row.innerHTML = `<td><strong>${stop.station}</strong></td><td>${stop.sched_tm}</td>`;
+      tbody.appendChild(row);
     });
-  </script>
+    table.appendChild(tbody);
+    div.appendChild(table);
+    return div;
+  }
+
+  // ── Toggle schedule row ──
+  async function toggleSchedule(trainNum, link) {
+    const row     = link.closest('tr');
+    const nextRow = row.nextElementSibling;
+
+    if (nextRow && nextRow.classList.contains('schedule-row')) {
+      nextRow.style.display = nextRow.style.display === 'none' ? 'table-row' : 'none';
+      return;
+    }
+
+    // Create placeholder row
+    const td = document.createElement('td');
+    td.colSpan = 6;
+    td.textContent = 'Loading schedule…';
+
+    const scheduleRow = document.createElement('tr');
+    scheduleRow.classList.add('schedule-row');
+    scheduleRow.appendChild(td);
+    scheduleRow.style.display = 'table-row';
+    row.after(scheduleRow);
+
+    const data    = await fetchTrainSchedule(trainNum);
+    const content = buildScheduleContent(data, trainNum);
+    td.textContent = '';
+    td.appendChild(content);
+  }
+
+  // ── Populate main table ──
+  function populateTable(data) {
+    const tbody = document.querySelector('#septa-table tbody');
+    tbody.innerHTML = '';
+
+    if (!data || data.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:1rem;">No trains found for these stations.</td></tr>';
+      return;
+    }
+
+    data.forEach(item => {
+      const delayClass = item.orig_delay === 'On time' ? 'on-time' : 'delayed';
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td><a href="#" class="train-link" data-train="${item.orig_train}">${item.orig_train}</a></td>
+        <td>${item.orig_line}</td>
+        <td>${item.orig_departure_time}</td>
+        <td>${item.orig_arrival_time}</td>
+        <td class="${delayClass}">${item.orig_delay}</td>
+        <td>${item.isdirect === 'true' ? 'Yes' : 'No'}</td>
+      `;
+      tbody.appendChild(row);
+    });
+
+    // Delegate click to avoid inline event attributes
+    tbody.addEventListener('click', e => {
+      const link = e.target.closest('.train-link');
+      if (!link) return;
+      e.preventDefault();
+      toggleSchedule(link.dataset.train, link);
+    });
+  }
+
+  // ── Form submit ──
+  document.getElementById('stationForm').addEventListener('submit', async e => {
+    e.preventDefault();
+
+    const origin      = originInput.value.trim();
+    const destination = destinationInput.value.trim();
+
+    // Warn but do not hard-block — let the API decide
+    const originValid = VALID_STATIONS.has(origin);
+    const destValid   = VALID_STATIONS.has(destination);
+
+    if (!originValid || !destValid) {
+      const bad = [];
+      if (!originValid) bad.push(`"${origin}" (Origin)`);
+      if (!destValid)   bad.push(`"${destination}" (Destination)`);
+      const proceed = confirm(
+        `The following station name(s) don't match the official list and may return no results:\n\n` +
+        bad.join('\n') +
+        `\n\nProceed anyway?`
+      );
+      if (!proceed) return;
+    }
+
+    const loadingEl = document.getElementById('loading');
+    const errorEl   = document.getElementById('error-msg');
+    const tableEl   = document.getElementById('septa-table');
+
+    loadingEl.textContent = 'Loading data… (hang tight!)';
+    loadingEl.style.display = 'block';
+    errorEl.style.display   = 'none';
+    tableEl.style.display   = 'none';
+    submitBtn.disabled      = true;
+
+    const data = await fetchSeptaData(origin, destination);
+
+    loadingEl.style.display = 'none';
+    submitBtn.disabled      = false;
+
+    if (data === null) {
+      errorEl.textContent    = 'Error fetching data. Check your connection and try again.';
+      errorEl.style.display  = 'block';
+      return;
+    }
+
+    if (Array.isArray(data) && data.length === 0) {
+      errorEl.textContent   = `No trains found between "${origin}" and "${destination}". Verify the station names are correct (green dot = valid).`;
+      errorEl.style.display = 'block';
+      return;
+    }
+
+    document.querySelector('#septa-project h2').textContent = `Next To Arrive: ${origin} ➡️ ${destination}`;
+    tableEl.style.display = 'table';
+    populateTable(data);
+  });
+</script>
+
 </body>
 </html>
